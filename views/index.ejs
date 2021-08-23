@@ -1,0 +1,23 @@
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+
+<body>
+  <%- include("./partials/nav.ejs") %>
+
+  <div class="blogs content">
+    <h2>All Quotes</h2>
+
+    <% if (quotes.length > 0) { %>
+      <% quotes.forEach(quote => { %>
+        <h3 class="title"><%= quote.title %></h3>
+        <p class="snippet"><%= quote.snippet %></p>
+      <% }) %>
+    <% } else { %>
+      <p>There are no blogs to display...</p>
+    <% } %>
+    
+  </div>
+
+  <%- include("./partials/footer.ejs") %>
+</body>
+</html>

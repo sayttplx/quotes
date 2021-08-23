@@ -6,20 +6,28 @@ const app = express();
 // listen for requests
 app.listen(3000);
 
+// register view engine
+app.set('view engine', 'ejs');
+// app.set('views', 'myviews');
+
 app.get('/', (req, res) => {
-   res.sendFile('./views/index.html', { root: __dirname})
+  const quotes = [
+    {title: 'Carl Sagan', snippet: `“If you wish to make an apple pie from scratch, you must first invent the universe.”`},
+    {title: 'Carl Sagan', snippet: `“Extraordinary claims require extraordinary evidence.”`},
+    {title: 'Carl Sagan', snippet: `“I don't want to believe. I want to know.”`},
+  ];
+  res.render('index', { title: 'Home', quotes });
 });
 
 app.get('/about', (req, res) => {
-   res.sendFile('./views/about.html', { root: __dirname})
+  res.render('about', { title: 'About' });
 });
 
-// redirects
-app.get('/about-us', (req,res) => {
-   res.redirect('/about')
-})
+app.get('/quotes/create', (req, res) => {
+  res.render('create', { title: 'Create a new quote' });
+});
 
 // 404 page
 app.use((req, res) => {
-   res.sendFile('./views/404.html', { root: __dirname})
+  res.status(404).render('404', { title: '404' });
 });
