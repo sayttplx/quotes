@@ -4,7 +4,7 @@
 <body>
   <%- include("./partials/nav.ejs") %>
 
-  <div class="blogs content">
+  <div class="quotes content">
     <h2>All Quotes</h2>
 
     <% if (quotes.length > 0) { %>
@@ -13,7 +13,7 @@
         <p class="snippet"><%= quote.snippet %></p>
       <% }) %>
     <% } else { %>
-      <p>There are no blogs to display...</p>
+      <p>There are no quotes to display...</p>
     <% } %>
     
   </div>
