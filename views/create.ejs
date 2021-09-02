@@ -1,21 +1,22 @@
 <html lang="en">
 <%- include("./partials/head.ejs") %>
 
-<body>
-  <%- include("./partials/nav.ejs") %>
+  <body>
+    <%- include("./partials/nav.ejs") %>
 
-  <div class="create-quote content">
-    <form>
-      <label for="title">Author:</label>
-      <input type="text" id="title" name="title" required>
-      <label for="snippet">Quote snippet:</label>
-      <input type="text" id="snippet" name="snippet" required>
-      <label for="body">Quote body:</label>
-      <textarea id="body" name="body" required></textarea>
-      <button>Submit</button>
-    </form>
-  </div>
+      <div class="create-quote content">
+        <form action="/quotes" method="POST">
+          <label for="name">Author:</label>
+          <input type="text" id="name" name="name" required>
+          <label for="snippet">Quote snippet:</label>
+          <input type="text" id="snippet" name="snippet" required>
+          <label for="body">Quote body:</label>
+          <textarea id="body" name="body" required></textarea>
+          <button>Submit</button>
+        </form>
+      </div>
 
-  <%- include("./partials/footer.ejs") %>
-</body>
+      <%- include("./partials/footer.ejs") %>
+  </body>
+
 </html>

@@ -34,7 +34,7 @@ app.get('/about', (req, res) => {
   res.render('about', { title: 'About' });
 });
 
-// fruit routes
+// quote routes
 app.use('/quotes', quoteRoutes);
 
 // 404 page

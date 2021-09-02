@@ -1,23 +1,30 @@
 <html lang="en">
 <%- include("./partials/head.ejs") %>
 
-<body>
-  <%- include("./partials/nav.ejs") %>
+  <body>
+    <%- include("./partials/nav.ejs") %>
 
-  <div class="quotes content">
-    <h2>All Quotes</h2>
+      <div class="quotes content">
+        <h2>All Quotes</h2>
 
-    <% if (quotes.length > 0) { %>
-      <% quotes.forEach(quote => { %>
-        <h3 class="title"><%= quote.title %></h3>
-        <p class="snippet"><%= quote.snippet %></p>
-      <% }) %>
-    <% } else { %>
-      <p>There are no quotes to display...</p>
-    <% } %>
-    
-  </div>
+        <% if (quotes.length> 0) { %>
+          <% quotes.forEach(quote=> { %>
+            <a class="single" href="/quotes/<%= quote._id %>">
+              <h3 class="name">
+                <%= quote.name %>
+              </h3>
+              <p class="snippet">
+                <%= quote.snippet %>
+              </p>
+            </a>
+            <% }) %>
+              <% } else { %>
+                <p>There are no quotes to display...</p>
+                <% } %>
 
-  <%- include("./partials/footer.ejs") %>
-</body>
+      </div>
+
+      <%- include("./partials/footer.ejs") %>
+  </body>
+
 </html>
