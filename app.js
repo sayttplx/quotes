@@ -1,31 +1,41 @@
+require('dotenv').config();
 const express = require('express');
+const morgan = require('morgan');
+const mongoose = require('mongoose');
+const quoteRoutes = require('./routes/quoteRoutes');
 
 // express app
 const app = express();
 
-// listen for requests
-app.listen(3000);
+// connect to mongodb & listen for requests
+mongoose.connect(process.env.MONGO_URI, {})
+  .then(result => app.listen(8080))
+  .then(console.log('Server is running at port 8080'))
+  .catch(err => console.log(err));
 
 // register view engine
 app.set('view engine', 'ejs');
-// app.set('views', 'myviews');
 
+// middleware & static files
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan('dev'));
+app.use((req, res, next) => {
+  res.locals.path = req.path;
+  next();
+});
+
+// routes
 app.get('/', (req, res) => {
-  const quotes = [
-    {title: 'Carl Sagan', snippet: `“If you wish to make an apple pie from scratch, you must first invent the universe.”`},
-    {title: 'Carl Sagan', snippet: `“Extraordinary claims require extraordinary evidence.”`},
-    {title: 'Carl Sagan', snippet: `“I don't want to believe. I want to know.”`},
-  ];
-  res.render('index', { title: 'Home', quotes });
+  res.redirect('/quotes');
 });
 
 app.get('/about', (req, res) => {
   res.render('about', { title: 'About' });
 });
 
-app.get('/quotes/create', (req, res) => {
-  res.render('create', { title: 'Create a new quote' });
-});
+// fruit routes
+app.use('/quotes', quoteRoutes);
 
 // 404 page
 app.use((req, res) => {
